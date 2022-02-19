@@ -7,7 +7,7 @@ pipeline {
    stages {
       stage('Git Checkout') {
          steps {
-            git 'https://github.com/Chandandhani/loginapp.git'   
+            git 'https://github.com/srikanta1219/loginapp.git'   
          }
       }
 
