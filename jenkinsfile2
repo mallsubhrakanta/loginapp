@@ -1,0 +1,21 @@
+pipeline {
+   agent any
+   tools {
+     maven "maven"  
+   }
+
+   stages {
+      stage('Git Checkout') {
+         steps {
+            git 'https://github.com/mallsubhrakanta/loginapp.git'   
+         }
+      }
+
+    stage ('Maven Goal'){
+      steps {
+         sh "mvn clean install package    " 
+      }    
+    }
+   
+    }
+}
