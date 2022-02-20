@@ -16,14 +16,6 @@ pipeline {
          sh "mvn clean install package    " 
       }    
     }
-    stage ('Deploying Artifact'){
-      steps {
-        sh "mvn deploy "
-       }
-     
-     
-    }
-
-
+   
     }
 }
