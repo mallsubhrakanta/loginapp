@@ -1,0 +1,39 @@
+pipeline {
+   agent any
+   tools {
+     maven "maven"  
+   }
+
+   stages {
+      stage('Git Checkout') {
+         steps {
+            git 'https://github.com/mallsubhrakanta/loginapp.git'   
+         }
+      }
+
+      stage ('Maven Goal'){
+         steps {
+           sh "mvn clean install package    " 
+         }    
+      }
+      stage('Docker Build and Tag') {
+           steps {
+              
+                sh 'docker build -t devopsclass3 .' 
+                sh 'docker tag devopsclass3 mallsubhrakanta/devopsclass3:latest'
+                
+               
+          }
+        }
+     
+        stage('Publish image to Docker Hub') {
+          
+         steps {
+          withDockerRegistry(credentialsId: 'docker-token', url: '') {
+		  sh  'docker push mallsubhrakanta/devopsclass3:latest'
+    
+	        }  
+          }
+        }
+    }
+}
